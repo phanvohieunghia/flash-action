@@ -1,7 +1,7 @@
 {
 	"name": "flash-action",
 	"description": "Support yourself to increase performance",
-	"version": "1.0.1",
+	"version": "1.1.1",
 	"license": "UNLICENSED",
 	"bin": {
 		"flash-action": "index.js",
