@@ -1,46 +1,46 @@
-const meow = require('meow');
-const meowHelp = require('cli-meow-help');
+const meow = require('meow')
+const meowHelp = require('cli-meow-help')
 
 const flags = {
 	clear: {
 		type: `boolean`,
 		default: false,
 		alias: `c`,
-		desc: `Clear the console`
+		desc: `Clear the console`,
 	},
 	noClear: {
 		type: `boolean`,
 		default: false,
-		desc: `Don't clear the console`
+		desc: `Don't clear the console`,
 	},
 	debug: {
 		type: `boolean`,
 		default: false,
 		alias: `d`,
-		desc: `Print debug info`
+		desc: `Print debug info`,
 	},
 	version: {
 		type: `boolean`,
 		alias: `v`,
-		desc: `Print CLI version`
-	}
-};
+		desc: `Print CLI version`,
+	},
+}
 
 const commands = {
-	help: { desc: `Print help info` }
-};
+	help: { desc: `Print help info` },
+}
 
 const helpText = meowHelp({
 	name: `n`,
 	flags,
-	commands
-});
+	commands,
+})
 
 const options = {
 	inferType: true,
 	description: false,
 	hardRejection: false,
-	flags
-};
+	flags,
+}
 
-module.exports = meow(helpText, options);
+module.exports = meow(helpText, options)
