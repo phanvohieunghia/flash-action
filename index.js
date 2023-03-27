@@ -65,5 +65,7 @@ function runPopup(link) {
 	// TODO: make full-screen for website window --start-fullscreen
 	// TODO: make search function
 	// TODO: check if exception
+	// TODO: make shutdown function
+
 	debug && log(flags)
 })()
