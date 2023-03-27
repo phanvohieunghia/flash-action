@@ -21,8 +21,9 @@ function run(command) {
 		err && console.info.call(console, `\x1b[31m${err}\x1b[0m`)
 	})
 }
-function runPopup(link) {
-	run(`${path.chrome} --app=https://${link}/`)
+function runPopup(link, isS = true) {
+	const s = isS ? 's' : ''
+	run(`${path.chrome} --app=http${s}://${link}/`)
 }
 ;(async () => {
 	!input.length && init({ clear })
@@ -41,7 +42,7 @@ function runPopup(link) {
 		input.includes(`yg`) && run(`start ${path.chrome} ${path.web.youglish}`)
 	} else if (window) {
 		input.includes(`cam`) && runPopup(path.web.cambridge)
-		input.includes(`gemi`) && runPopup(path.web.geminisoft)
+		input.includes(`gemi`) && runPopup(path.web.geminisoft, false)
 		input.includes(`gpt`) && runPopup(path.web.chatGPT)
 		input.includes(`image`) && runPopup(path.web.google_image)
 		input.includes(`keep`) && runPopup(path.keep.google_keep)
