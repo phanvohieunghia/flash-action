@@ -22,7 +22,7 @@ function run(command) {
 	})
 }
 function runPopup(link) {
-	run(`${path.chrome} --app=https://www.${link}/`)
+	run(`${path.chrome} --app=https://${link}/`)
 }
 ;(async () => {
 	!input.length && init({ clear })
@@ -63,5 +63,7 @@ function runPopup(link) {
 	input.includes(`z`) && run(`start ${path.zalo}`)
 
 	// TODO: make full-screen for website window --start-fullscreen
+	// TODO: make search function
+	// TODO: check if exception
 	debug && log(flags)
 })()
