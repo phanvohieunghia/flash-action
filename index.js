@@ -62,5 +62,6 @@ function runPopup(link) {
 	input.includes(`tv`) && run(`start ${path.teamViewer}`)
 	input.includes(`z`) && run(`start ${path.zalo}`)
 
+	// TODO: make full-screen for website window --start-fullscreen
 	debug && log(flags)
 })()
