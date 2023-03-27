@@ -11,54 +11,56 @@ const init = require('./utils/init')
 const cli = require('./utils/cli')
 const log = require('./utils/log')
 const path = require('./utils/path')
-const PowerShell = require('powershell')
+const cmd = require('node-cmd')
 
 const input = cli.input
 const flags = cli.flags
-const { clear, debug } = flags
-
-function run(script) {
-	const ps = new PowerShell(script)
-	ps.on('error', (err) => {
-		console.error(err)
-	})
-	// Stdout
-	ps.on('output', (data) => {
-		console.log(data)
-	})
-	// Stderr
-	ps.on('error-output', (data) => {
-		console.error(data)
-	})
-	// End
-	ps.on('end', (code) => {
-		// Do Something on end
+const { clear, debug, window } = flags
+function run(command) {
+	cmd.run(command, function (err, data, stderr) {
+		err && console.info.call(console, `\x1b[31m${err}\x1b[0m`)
 	})
 }
-
+function runPopup(link) {
+	run(`${path.chrome} --app=https://www.${link}/`)
+}
 ;(async () => {
 	!input.length && init({ clear })
-
 	input.includes(`help`) && cli.showHelp(0)
-
-	input.includes(`c`) && run(`start ${path.chrome}`)
-	input.includes(`cam`) && run(`start ${path.chrome} ${path.cambridge}`)
+	if (!window) {
+		input.includes(`cam`) && run(`${path.chrome} ${path.web.cambridge}`)
+		input.includes(`gemi`) && run(`${path.web.geminisoft} `)
+		input.includes(`gpt`) && run(`${path.chrome} ${path.web.chatGPT}`)
+		input.includes(`image`) && run(`${path.chrome} ${path.web.google_image}`)
+		input.includes(`keep`) && run(`${path.chrome} ${path.keep.google_keep}`)
+		input.includes(`map`) && run(`${path.chrome} ${path.web.google_map}`)
+		input.includes(`mi`) && run(`start ${path.chrome} ${path.web.miro}`)
+		input.includes(`ox`) && run(`start ${path.chrome} ${path.web.oxford}`)
+		input.includes(`tr`) && run(`${path.chrome} ${path.web.google_translate}`)
+		input.includes(`y`) && run(`start ${path.chrome} ${path.web.youtube}`)
+		input.includes(`yg`) && run(`start ${path.chrome} ${path.web.youglish}`)
+	} else if (window) {
+		input.includes(`cam`) && runPopup(path.web.cambridge)
+		input.includes(`gemi`) && runPopup(path.web.geminisoft)
+		input.includes(`gpt`) && runPopup(path.web.chatGPT)
+		input.includes(`image`) && runPopup(path.web.google_image)
+		input.includes(`keep`) && runPopup(path.keep.google_keep)
+		input.includes(`map`) && runPopup(path.web.google_map)
+		input.includes(`mi`) && runPopup(path.web.miro)
+		input.includes(`ox`) && runPopup(path.web.oxford)
+		input.includes(`tr`) && runPopup(path.web.google_translate)
+		input.includes(`y`) && runPopup(path.web.youtube)
+		input.includes(`yg`) && runPopup(path.web.youglish)
+	}
+	input.includes(`c`) && run(path.chrome)
 	input.includes(`code`) && run(path.vscode)
 	input.includes(`di`) && run(`start ${path.discord}`)
 	input.includes(`fi`) && run(`start ${path.figma}`)
-	input.includes(`image`) && run(`start ${path.chrome} ${path.google_image}`)
-	input.includes(`keep`) && run(`start ${path.chrome} ${path.google_keep}`)
-	input.includes(`map`) && run(`start ${path.chrome} ${path.google_map}`)
-	input.includes(`mi`) && run(`start ${path.chrome} ${path.miro}`)
-	input.includes(`ox`) && run(`start ${path.chrome} ${path.oxford}`)
+	input.includes(`no`) && run(`start ${path.notion}`)
 	input.includes(`sh`) && run(`start ${path.shareX}`)
 	input.includes(`sl`) && run(`start ${path.slack}`)
-	input.includes(`tr`) && run(`start ${path.chrome} ${path.google_translate}`)
 	input.includes(`tv`) && run(`start ${path.teamViewer}`)
-	input.includes(`y`) && run(`start ${path.chrome} ${path.youtube}`)
-	input.includes(`yg`) && run(`start ${path.chrome} ${path.youglish}`)
 	input.includes(`z`) && run(`start ${path.zalo}`)
-	//FIXME: add notion short action
 
 	debug && log(flags)
 })()

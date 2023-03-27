@@ -24,6 +24,11 @@ const flags = {
 		alias: `v`,
 		desc: `Print CLI version`,
 	},
+	window: {
+		type: `boolean`,
+		alias: `w`,
+		desc: 'Open website as a window',
+	},
 }
 
 const commands = {
