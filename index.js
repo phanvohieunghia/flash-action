@@ -20,9 +20,21 @@ const { clear, debug, window } = flags
 
 ;(async () => {
 	!input.length && init({ clear })
-	checkI(c.cam) && cli.showHelp(0)
+	checkI(c.help) && cli.showHelp(0)
 	debug && log(flags)
 	// Web
+	checkI(c.cam) && run(`${path.chrome} ${path.web.cambridge}`)
+	checkI(c.gemi) && run(`${path.chrome} ${wrapH(path.web.geminisoft, false)}`)
+	checkI(c.gpt) && run(`${path.chrome} ${path.web.chatGPT}`)
+	checkI(c.image) && run(`${path.chrome} ${path.web.google_image}`)
+	checkI(c.keep) && run(`${path.chrome} ${path.keep.google_keep}`)
+	checkI(c.map) && run(`${path.chrome} ${path.web.google_map}`)
+	checkI(c.mi) && run(`${path.chrome} ${path.web.miro}`)
+	checkI(c.ox) && run(`${path.chrome} ${path.web.oxford}`)
+	checkI(c.tr) && run(`${path.chrome} ${path.web.google_translate}`)
+	checkI(c.y) && run(`${path.chrome} ${path.web.youtube}`)
+	checkI(c.yg) && run(`${path.chrome} ${path.web.youglish}`)
+	// Web with a window
 	if (window) {
 		checkI(c.cam) && runP(path.web.cambridge)
 		checkI(c.gemi) && runP(path.web.geminisoft, false)
@@ -36,17 +48,6 @@ const { clear, debug, window } = flags
 		checkI(c.y) && runP(path.web.youtube)
 		checkI(c.yg) && runP(path.web.youglish)
 	}
-	checkI(c.cam) && run(`${path.chrome} ${path.web.cambridge}`)
-	checkI(c.gemi) && run(`${path.chrome} ${wrapH(path.web.geminisoft, false)}`)
-	checkI(c.gpt) && run(`${path.chrome} ${path.web.chatGPT}`)
-	checkI(c.image) && run(`${path.chrome} ${path.web.google_image}`)
-	checkI(c.keep) && run(`${path.chrome} ${path.keep.google_keep}`)
-	checkI(c.map) && run(`${path.chrome} ${path.web.google_map}`)
-	checkI(c.mi) && run(`${path.chrome} ${path.web.miro}`)
-	checkI(c.ox) && run(`${path.chrome} ${path.web.oxford}`)
-	checkI(c.tr) && run(`${path.chrome} ${path.web.google_translate}`)
-	checkI(c.y) && run(`${path.chrome} ${path.web.youtube}`)
-	checkI(c.yg) && run(`${path.chrome} ${path.web.youglish}`)
 	// App
 	checkI(c.c) && run(path.chrome)
 	checkI(c.code) && run(path.vscode)
@@ -58,7 +59,7 @@ const { clear, debug, window } = flags
 	checkI(c.tv) && run(path.teamViewer)
 	checkI(c.z) && run(path.zalo)
 
-	// TODO: make full-screen for website window --start-fullscreen
+	// TODO: mak-screen for website window --starscreen
 	// TODO: make search function
 	// TODO: check if exception
 	// TODO: make shutdown function

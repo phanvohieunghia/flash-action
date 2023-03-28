@@ -6,7 +6,6 @@ const cmd = require('node-cmd')
 // run command by Command Prompt
 function run(command) {
 	cmd.run(command, function (err, data, stderr) {
-		console.log(command)
 		if (err) {
 			console.info.call(console, `\x1b[31m${err}\x1b[0m`)
 		}
