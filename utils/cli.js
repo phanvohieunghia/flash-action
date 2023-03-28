@@ -34,29 +34,42 @@ const flags = {
 }
 
 const commands = {
-	cam: { desc: `Open chrome with Cambridge Dictionary website` },
-	fi: { desc: `Open Figma Application` },
-	gpt: { desc: `Open chrome with chatGPT website` },
 	help: { desc: `Print help info` },
-	image: { desc: `Open chrome with Google Image website` },
-	keep: { desc: `Open chrome with Google Keep website` },
-	map: { desc: `Open chrome with Google Map website` },
-	mi: { desc: `Open chrome with Miro website` },
-	no: { desc: `Open Notion Application` },
-	ox: { desc: `Open chrome with Oxford Dictionary website` },
-	sh: { desc: `Open ShareX Application` },
-	sl: { desc: `Open Slack Application` },
-	tr: { desc: `Open chrome with Google Translate website` },
+	code: { desc: `Open Visual Studio Code` },
+	di: { desc: `Open Discord` },
+	fi: { desc: `Open Figma` },
+	no: { desc: `Open Notion` },
+	sh: { desc: `Open ShareX` },
+	sl: { desc: `Open Slack` },
 	tv: { desc: `Open Teamviewer Application` },
-	y: { desc: `Open chrome with Youtube website` },
-	yg: { desc: `Open chrome with Youglish website` },
 	z: { desc: `Open Zalo Application` },
+	c: {
+		desc: `Open Chrome with some website such as
+cambridge(cam), geminisoft(gemi), figma(fi),
+chatgpt(gpt), image, keep, map, mi(miro), 
+oxford(ox), translate(tr), notion(no), youtube(y),
+youglish(y), zalo(z)`,
+	},
 }
+
+const footer = 'sflk'
+
+const examples = [
+	{
+		command: `c <command>`,
+	},
+	{
+		command: `c <command>`,
+		flags: [`window`],
+	},
+]
 
 const helpText = meowHelp({
 	name: `n`,
 	flags,
 	commands,
+	examples,
+	footer,
 })
 
 const options = {

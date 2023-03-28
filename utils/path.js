@@ -11,15 +11,17 @@ module.exports = {
 	web: {
 		cambridge: 'dictionary.cambridge.org',
 		chatGPT: 'chat.openai.com',
+		figma: 'figma.com',
 		geminisoft: 'geminisoft.iptime.org:10000/projects/mymy-archive-pe/issues',
 		google_image: 'images.google.com',
 		google_keep: 'keep.google.com',
 		google_map: 'maps.google.com',
 		google_translate: 'translate.google.com',
 		miro: 'miro.com',
-		noition: 'notion.so',
+		notion: 'notion.so',
 		oxford: 'oxfordlearnersdictionaries.com',
 		youglish: 'youglish.com',
 		youtube: 'youtube.com',
+		zalo: 'chat.zalo.me',
 	},
 }
