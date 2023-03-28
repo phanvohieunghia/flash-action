@@ -10,64 +10,56 @@
 const init = require('./utils/init')
 const cli = require('./utils/cli')
 const log = require('./utils/log')
-
+const c = require('./utils/command.json')
 const path = require('./utils/path')
-const cmd = require('node-cmd')
+const { run, checkI, runP, wrapH } = require('./utils/common')
 
 const input = cli.input
 const flags = cli.flags
 const { clear, debug, window } = flags
-function run(command) {
-	cmd.run(command, function (err, data, stderr) {
-		err && console.info.call(console, `\x1b[31m${err}\x1b[0m`)
-	})
-}
-function runPopup(link, isS = true) {
-	const s = isS ? 's' : ''
-	run(`${path.chrome} --app=http${s}://${link}/`)
-}
+
 ;(async () => {
 	!input.length && init({ clear })
-	input.includes(`help`) && cli.showHelp(0)
-	if (!window) {
-		input.includes(`cam`) && run(`${path.chrome} ${path.web.cambridge}`)
-		input.includes(`gemi`) && run(`${path.web.geminisoft} `)
-		input.includes(`gpt`) && run(`${path.chrome} ${path.web.chatGPT}`)
-		input.includes(`image`) && run(`${path.chrome} ${path.web.google_image}`)
-		input.includes(`keep`) && run(`${path.chrome} ${path.keep.google_keep}`)
-		input.includes(`map`) && run(`${path.chrome} ${path.web.google_map}`)
-		input.includes(`mi`) && run(`start ${path.chrome} ${path.web.miro}`)
-		input.includes(`ox`) && run(`start ${path.chrome} ${path.web.oxford}`)
-		input.includes(`tr`) && run(`${path.chrome} ${path.web.google_translate}`)
-		input.includes(`y`) && run(`start ${path.chrome} ${path.web.youtube}`)
-		input.includes(`yg`) && run(`start ${path.chrome} ${path.web.youglish}`)
-	} else if (window) {
-		input.includes(`cam`) && runPopup(path.web.cambridge)
-		input.includes(`gemi`) && runPopup(path.web.geminisoft, false)
-		input.includes(`gpt`) && runPopup(path.web.chatGPT)
-		input.includes(`image`) && runPopup(path.web.google_image)
-		input.includes(`keep`) && runPopup(path.keep.google_keep)
-		input.includes(`map`) && runPopup(path.web.google_map)
-		input.includes(`mi`) && runPopup(path.web.miro)
-		input.includes(`ox`) && runPopup(path.web.oxford)
-		input.includes(`tr`) && runPopup(path.web.google_translate)
-		input.includes(`y`) && runPopup(path.web.youtube)
-		input.includes(`yg`) && runPopup(path.web.youglish)
+	checkI(c.cam) && cli.showHelp(0)
+	debug && log(flags)
+	// Web
+	if (window) {
+		checkI(c.cam) && runP(path.web.cambridge)
+		checkI(c.gemi) && runP(path.web.geminisoft, false)
+		checkI(c.gpt) && runP(path.web.chatGPT)
+		checkI(c.image) && runP(path.web.google_image)
+		checkI(c.keep) && runP(path.keep.google_keep)
+		checkI(c.map) && runP(path.web.google_map)
+		checkI(c.mi) && runP(path.web.miro)
+		checkI(c.ox) && runP(path.web.oxford)
+		checkI(c.tr) && runP(path.web.google_translate)
+		checkI(c.y) && runP(path.web.youtube)
+		checkI(c.yg) && runP(path.web.youglish)
 	}
-	input.includes(`c`) && run(path.chrome)
-	input.includes(`code`) && run(path.vscode)
-	input.includes(`di`) && run(`start ${path.discord}`)
-	input.includes(`fi`) && run(`start ${path.figma}`)
-	input.includes(`no`) && run(`start ${path.notion}`)
-	input.includes(`sh`) && run(`start ${path.shareX}`)
-	input.includes(`sl`) && run(`start ${path.slack}`)
-	input.includes(`tv`) && run(`start ${path.teamViewer}`)
-	input.includes(`z`) && run(`start ${path.zalo}`)
+	checkI(c.cam) && run(`${path.chrome} ${path.web.cambridge}`)
+	checkI(c.gemi) && run(`${path.chrome} ${wrapH(path.web.geminisoft, false)}`)
+	checkI(c.gpt) && run(`${path.chrome} ${path.web.chatGPT}`)
+	checkI(c.image) && run(`${path.chrome} ${path.web.google_image}`)
+	checkI(c.keep) && run(`${path.chrome} ${path.keep.google_keep}`)
+	checkI(c.map) && run(`${path.chrome} ${path.web.google_map}`)
+	checkI(c.mi) && run(`${path.chrome} ${path.web.miro}`)
+	checkI(c.ox) && run(`${path.chrome} ${path.web.oxford}`)
+	checkI(c.tr) && run(`${path.chrome} ${path.web.google_translate}`)
+	checkI(c.y) && run(`${path.chrome} ${path.web.youtube}`)
+	checkI(c.yg) && run(`${path.chrome} ${path.web.youglish}`)
+	// App
+	checkI(c.c) && run(path.chrome)
+	checkI(c.code) && run(path.vscode)
+	checkI(c.di) && run(path.discord)
+	checkI(c.fi) && run(path.figma)
+	checkI(c.no) && run(path.notion)
+	checkI(c.sh) && run(path.shareX)
+	checkI(c.sl) && run(path.slack)
+	checkI(c.tv) && run(path.teamViewer)
+	checkI(c.z) && run(path.zalo)
 
 	// TODO: make full-screen for website window --start-fullscreen
 	// TODO: make search function
 	// TODO: check if exception
 	// TODO: make shutdown function
-
-	debug && log(flags)
 })()
