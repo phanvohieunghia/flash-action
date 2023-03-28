@@ -8,6 +8,7 @@ module.exports = {
 	teamViewer: `"C:\\Program Files\\TeamViewer\\TeamViewer.exe"`,
 	vscode: 'code',
 	zalo: `"%USERPROFILE%\\AppData\\Local\\Programs\\Zalo\\Zalo.exe"`,
+	shutdown: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | stop-process | shutdown -s -t 2`,
 	web: {
 		cambridge: 'dictionary.cambridge.org',
 		chatGPT: 'chat.openai.com',
@@ -23,5 +24,6 @@ module.exports = {
 		youglish: 'youglish.com',
 		youtube: 'youtube.com',
 		zalo: 'chat.zalo.me',
+		messenger: 'messenger.com',
 	},
 }

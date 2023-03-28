@@ -31,7 +31,8 @@
 		"cli-meow-help": "^3.1.0",
 		"cli-welcome": "^2.2.2",
 		"meow": "^9.0.0",
-		"node-cmd": "^5.0.0"
+		"node-cmd": "^5.0.0",
+		"powershell": "^2.3.2"
 	},
 	"devDependencies": {
 		"prettier": "^2.8.5"
