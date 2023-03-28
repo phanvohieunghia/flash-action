@@ -9,7 +9,7 @@ module.exports = {
 	vscode: 'code',
 	zalo: `"%USERPROFILE%\\AppData\\Local\\Programs\\Zalo\\Zalo.exe"`,
 	shutdown: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | stop-process | shutdown -s -t 2`,
-	web: {
+	url: {
 		cambridge: 'dictionary.cambridge.org',
 		chatGPT: 'chat.openai.com',
 		figma: 'figma.com',
