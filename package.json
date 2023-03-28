@@ -2,7 +2,7 @@
 	"name": "flash-action",
 	"description": "Support yourself to increase performance",
 	"version": "1.1.1",
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"bin": {
 		"flash-action": "index.js",
 		"n": "index.js"
