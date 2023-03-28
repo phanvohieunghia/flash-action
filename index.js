@@ -11,7 +11,7 @@ const init = require('./utils/init')
 const cli = require('./utils/cli')
 const log = require('./utils/log')
 const c = require('./utils/command.json')
-const path = require('./utils/path')
+const path = require('./utils/script')
 const { run, checkI, runP, runPS, wrapH } = require('./utils/common')
 
 const input = cli.input

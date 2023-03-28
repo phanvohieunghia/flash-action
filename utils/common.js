@@ -1,6 +1,6 @@
 const cli = require('./cli')
 const input = cli.input
-const path = require('./path')
+const path = require('./script')
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
 
