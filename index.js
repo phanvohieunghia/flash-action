@@ -71,7 +71,7 @@ const { clear, debug, window } = flags
 		checkI(c.tv) && run(script.teamViewer)
 		checkI(c.z) && run(script.zalo)
 		if (checkI(c.shutdown)) {
-			runPS(c.shutdown)
+			runPS(script.shutdown)
 		}
 	}
 
