@@ -66,6 +66,7 @@ const { clear, debug, window } = flags
 		checkI(c.di) && run(script.discord)
 		checkI(c.fi) && run(script.figma)
 		checkI(c.no) && run(script.notion)
+		checkI(c.obs) && run(`start /d ${script.obs} "" obs64.exe`)
 		checkI(c.sh) && run(script.shareX)
 		checkI(c.sl) && run(script.slack)
 		checkI(c.tv) && run(script.teamViewer)
