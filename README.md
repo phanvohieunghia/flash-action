@@ -28,7 +28,7 @@ Supported apps include:
 - `tv` - Teamviewer.
 - `z` - Zalo.
 
-### For application:
+### For website:
 
 You use flash-action as basic browser:
 
