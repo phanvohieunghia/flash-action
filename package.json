@@ -1,7 +1,7 @@
 {
 	"name": "flash-action",
 	"description": "A CLI improve work performances",
-	"version": "1.2.3",
+	"version": "1.3.1",
 	"license": "MIT",
 	"bin": {
 		"flash-action": "index.js",
@@ -13,8 +13,10 @@
 		"url": "https://phanvohieunghia.vercel.app/"
 	},
 	"keywords": [
+		"cli",
 		"flash-action",
-		"Phan Vo Hieu Nghia"
+		"Phan Vo Hieu Nghia",
+		"shutdown"
 	],
 	"files": [
 		"index.js",
