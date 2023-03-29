@@ -1,7 +1,7 @@
 {
 	"name": "flash-action",
-	"description": "Support yourself to increase performance",
-	"version": "1.2.2",
+	"description": "A CLI improve work performances",
+	"version": "1.3.1",
 	"license": "MIT",
 	"bin": {
 		"flash-action": "index.js",
@@ -13,15 +13,24 @@
 		"url": "https://phanvohieunghia.vercel.app/"
 	},
 	"keywords": [
+		"cli",
 		"flash-action",
-		"Phan Vo Hieu Nghia"
+		"Phan Vo Hieu Nghia",
+		"shutdown"
 	],
 	"files": [
 		"index.js",
-		"utils"
+		"utils",
+		"LICENSE"
 	],
 	"scripts": {
 		"format": "prettier --write \"./**/*.{js,json}\""
+	},
+	"homepage": "https://github.com/phanvohieunghia/flash-action",
+	"bugs": "https://github.com/phanvohieunghia/flash-action/issues",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/phanvohieunghia/flash-action"
 	},
 	"dependencies": {
 		"chalk": "^4.1.2",
