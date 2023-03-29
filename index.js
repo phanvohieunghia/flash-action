@@ -76,8 +76,8 @@ const { clear, debug, window } = flags
 		}
 	}
 
-	// TODO: mak-screen for urlsite window --starscreen
 	// TODO: make search function
 	// TODO: check if exception
-	// TODO: make shutdown function
+	// TODO: make startup function
+	// TODO: add github website
 })()
