@@ -6,6 +6,7 @@ module.exports = {
 	obs: `"C:\\Program Files\\obs-studio\\bin\\64bit"`,
 	shareX: `C:\Program Files\\ShareX\\ShareX.exe"`,
 	shutdown: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | Stop-Process | Out-Null | shutdown -s -t 0`,
+	restart: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | Stop-Process | Out-Null | shutdown -r`,
 	slack: `"%USERPROFILE%\\AppData\\Local\\slack\\slack.exe"`,
 	teamViewer: `"C:\\Program Files\\TeamViewer\\TeamViewer.exe"`,
 	vscode: 'code',

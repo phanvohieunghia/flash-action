@@ -74,10 +74,12 @@ const { clear, debug, window } = flags
 		if (checkI(c.shutdown)) {
 			runPS(script.shutdown)
 		}
+		if (checkI(c.restart)) {
+			runPS(script.restart)
+		}
 	}
 
 	// TODO: make search function
 	// TODO: check if exception
-	// TODO: make startup function
 	// TODO: add github website
 })()
