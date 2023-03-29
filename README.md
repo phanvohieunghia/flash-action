@@ -16,6 +16,18 @@ npm install -g flash-action
 n <command>
 ```
 
+Supported apps include:
+
+- `code` - Visual Studio Code.
+- `di` - Discord.
+- `fi` - Figma.
+- `mi` - Miro.
+- `no` - Notion.
+- `sh` - ShareX.
+- `sl` - Slack.
+- `tv` - Teamviewer.
+- `z` - Zalo.
+
 ### For application:
 
 You use flash-action as basic browser:
@@ -26,13 +38,11 @@ n c <command>
 
 You can also surf the internet as a window:
 
-For websites as a window:
-
 ```sh
 n c <command> --window
 ```
 
-Supported website include:
+Supported websites include:
 
 - `cam` - Cambridge Dictionary.
 - `fi` - Figma.
