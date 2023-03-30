@@ -74,10 +74,12 @@ const { clear, debug, window } = flags
 		if (checkI(c.shutdown)) {
 			runPS(script.shutdown)
 		}
+		if (checkI(c.restart)) {
+			runPS(script.restart)
+		}
 	}
 
-	// TODO: mak-screen for urlsite window --starscreen
 	// TODO: make search function
 	// TODO: check if exception
-	// TODO: make shutdown function
+	// TODO: add github website
 })()
