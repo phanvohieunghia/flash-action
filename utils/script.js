@@ -4,7 +4,7 @@ module.exports = {
 	figma: `%USERPROFILE%\\AppData\\Local\\Figma\\Update.exe --processStart Figma.exe`,
 	notion: `"%USERPROFILE%\\AppData\\Local\\Programs\\Notion"`,
 	obs: `"C:\\Program Files\\obs-studio\\bin\\64bit"`,
-	shareX: `C:\Program Files\\ShareX\\ShareX.exe"`,
+	shareX: `"C:\Program Files\\ShareX\\ShareX.exe"`,
 	shutdown: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | Where-Object ProcessName -NotContains "WindowsTerminal" | Stop-Process ; Stop-Computer`,
 	restart: `Get-Process | Where-Object {$_.MainWindowTitle -ne ""} | Where-Object ProcessName -NotContains "WindowsTerminal" | Stop-Process ; Restart-Computer`,
 	slack: `"%USERPROFILE%\\AppData\\Local\\slack\\slack.exe"`,
