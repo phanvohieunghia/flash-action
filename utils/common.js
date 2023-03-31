@@ -3,6 +3,7 @@ const input = cli.input
 const path = require('./script')
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
+const c = require('./command.json')
 
 // run command by Command Prompt
 function run(command) {
@@ -27,6 +28,7 @@ function wrapH(url, isS = true) {
 	const s = isS ? 's' : ''
 	return `http${s}://${url}`
 }
+
 function runPS(script) {
 	const ps = new PowerShell(script)
 	ps.on('error', (err) => {
@@ -46,4 +48,15 @@ function runPS(script) {
 	})
 }
 
-module.exports = { run, runP, runPS, checkI, wrapH }
+function checkExceptionCommand() {
+	if (input.every((item) => c[item] === undefined)) {
+		console.log(`Unknown command: "${input[0]}"
+		
+To see a list of supported n command, run:
+  n help`)
+		return false
+	}
+	return true
+}
+
+module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand }
