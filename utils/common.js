@@ -1,6 +1,6 @@
 const cli = require('./cli')
 const input = cli.input
-const path = require('./script')
+const s = require('./script')
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
 const c = require('./command.json')
@@ -16,7 +16,7 @@ function run(command) {
 
 // Run website as a window
 function runP(url, isS = true) {
-	run(`${path.chrome} --app=${wrapH(url, isS)}`)
+	run(`${s.app.chrome} --app=${wrapH(url, isS)}`)
 }
 
 // check command have in input list
@@ -59,4 +59,13 @@ To see a list of supported n command, run:
 	return true
 }
 
-module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand }
+function checkIL(callback) {
+	const stack = []
+	input.forEach((item) => {
+		if (item.includes('l:')) stack.push(item.slice(2))
+	})
+	callback(stack)
+	return false
+}
+
+module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand, checkIL }
