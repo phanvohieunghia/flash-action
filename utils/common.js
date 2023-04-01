@@ -59,4 +59,13 @@ To see a list of supported n command, run:
 	return true
 }
 
-module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand }
+function checkIL(callback) {
+	const stack = []
+	input.forEach((item) => {
+		if (item.includes('l:')) stack.push(item.slice(2))
+	})
+	callback(stack)
+	return false
+}
+
+module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand, checkIL }

@@ -12,7 +12,7 @@ const cli = require('./utils/cli')
 const log = require('./utils/log')
 const c = require('./utils/command.json')
 const s = require('./utils/script') // scirpt
-const { run, checkI, runP, runPS, wrapH, checkExceptionCommand } = require('./utils/common')
+const { run, checkI, runP, runPS, wrapH, checkExceptionCommand, checkIL } = require('./utils/common')
 
 let input = cli.input
 const flags = cli.flags
@@ -43,6 +43,11 @@ const { clear, debug, window } = flags
 				checkI(c.z) && run(`${s.app.chrome} ${s.url.zalo}`)
 				checkI(c.z) && run(`${s.app.chrome} ${s.url.zalo}`)
 				checkI(c.github) && run(`${s.app.chrome} ${s.url.github}`)
+				checkIL((stack) => {
+					stack.forEach((port) => {
+						run(`${s.app.chrome} http://localhost:${port}`)
+					})
+				})
 			}
 			// url with a window
 			else if (window) {
