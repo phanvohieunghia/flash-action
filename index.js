@@ -12,9 +12,9 @@ const cli = require('./utils/cli')
 const log = require('./utils/log')
 const { handleValidation } = require('./utils/common')
 
-let input = cli.input
+const input = cli.input
 const flags = cli.flags
-const { clear, debug, window } = flags
+const { clear, debug } = flags
 
 ;(async () => {
 	debug && log(flags)
@@ -27,6 +27,4 @@ const { clear, debug, window } = flags
 	handleValidation(input)
 
 	// TODO: make search function
-	// TODO: check if exception
-	// TODO: add github website
 })()
