@@ -1,38 +1,28 @@
 const cli = require('./cli')
-const input = cli.input
-const s = require('./script')
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
 const c = require('./command.json')
 
+const flags = cli.flags
+
 // run command by Command Prompt
 function run(command) {
 	cmd.run(command, function (err, data, stderr) {
-		if (err) {
-			console.info.call(console, `\x1b[31m${err}\x1b[0m`)
-		}
+		if (err) logError(err)
 	})
 }
 
-// Run website as a window
-function runP(url, isS = true) {
-	run(`${s.app.chrome} --app=${wrapH(url, isS)}`)
+// Run website
+function runW(url, isWindow, isS = true) {
+	let convertURL = isS ? `https://${url}` : `http://${url}`
+	convertURL = isWindow ? ' --app=' + convertURL : convertURL
+	run(`${c.app.chrome} ${convertURL}`)
 }
-
-// check command have in input list
-function checkI(command) {
-	return input.includes(command)
-}
-
-function wrapH(url, isS = true) {
-	const s = isS ? 's' : ''
-	return `http${s}://${url}`
-}
-
+// Run powershell
 function runPS(script) {
 	const ps = new PowerShell(script)
 	ps.on('error', (err) => {
-		console.info.call(console, `\x1b[31m${err}\x1b[0m`)
+		logError(err)
 	})
 	// Stdout
 	ps.on('output', (data) => {
@@ -46,26 +36,81 @@ function runPS(script) {
 	ps.on('end', (code) => {
 		// Do Something on end
 	})
-}
 
-function checkExceptionCommand() {
-	if (input.every((item) => c[item] === undefined)) {
-		console.log(`Unknown command: "${input[0]}"
-		
-To see a list of supported n command, run:
-  n help`)
-		return false
+	function logError(script) {
+		console.info.call(console, `\x1b[31m${script}\x1b[0m`)
 	}
-	return true
 }
 
-function checkIL(callback) {
-	const stack = []
-	input.forEach((item) => {
-		if (item.includes('l:')) stack.push(item.slice(2))
+function checkExceptionCommand(command) {
+	if (c[command] === undefined) {
+		console.log(`Unknown option: "${command}"
+		
+To see a list of supported n option, run:
+  n help`)
+	}
+}
+
+function handleValidation(stack) {
+	while (stack.length) {
+		const command = stack.shift()
+		makeCommand(command, stack)
+	}
+}
+
+function checkOptions(command, options) {
+	switch (command) {
+		case 'help':
+		case 'shutdown':
+		case 'restart':
+			return true
+	}
+	if (!options) {
+		logError('You need string input with each command separated by a space')
+		return false
+	} else return true
+}
+
+function makeCommand(command, stack) {
+	const options = stack.shift()?.trim().split(/[ ]+/g)
+	if (!checkOptions(command, options)) return
+
+	switch (command) {
+		case 'app':
+			handleAppCommand(options)
+			break
+		case 'web':
+			handleWebCommand(options)
+			break
+		case 'shutdown':
+			runPS(c.shutdown)
+			break
+		case 'restart':
+			runPS(c.restart)
+			break
+		case 'help':
+			cli.showHelp(0)
+			break
+		default:
+			checkExceptionCommand(command)
+	}
+}
+
+function handleAppCommand(options) {
+	options.forEach((option) => {
+		if (!!c.app[option]) run(c.app[option])
+		else logError(`Unknown command: "${option}"`)
 	})
-	callback(stack)
-	return false
 }
 
-module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand, checkIL }
+function handleWebCommand(options) {
+	options.forEach((option) => {
+		if (!!c.web[option]) {
+			if (option === 'gemi') runW(c.web[option], flags.window, false)
+			else runW(c.web[option], flags.window)
+		} else if (option.match(/:[\d]+/)) runW('localhost' + option)
+		else logError(`Unknown command: "${option}"`)
+	})
+}
+
+module.exports = { handleValidation }

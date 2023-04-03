@@ -35,31 +35,36 @@ const flags = {
 
 const commands = {
 	help: { desc: `Print help info` },
-	code: { desc: `Open Visual Studio Code` },
-	di: { desc: `Open Discord` },
-	fi: { desc: `Open Figma` },
-	no: { desc: `Open Notion` },
-	sh: { desc: `Open ShareX` },
-	sl: { desc: `Open Slack` },
-	tv: { desc: `Open Teamviewer Application` },
-	z: { desc: `Open Zalo Application` },
-	c: {
-		desc: `Open Chrome with some website such as
-cambridge(cam), geminisoft(gemi), figma(fi),
-chatgpt(gpt), image, keep, map, mi(miro), 
-oxford(ox), translate(tr), notion(no), youtube(y),
-youglish(y), zalo(z)`,
-	},
+	shutdown: { desc: `Close all process and shutdown immediately` },
+	restart: { desc: `Close all process and restart immediately` },
+	web: { desc: `Open Website` },
+	app: { desc: `Open Application` },
 }
 
-const footer = 'sflk'
+const footer = `List of website supported:
+  cambridge(cam), figma(fi), github, chatGPT(gpt),
+  google image(image), keep(google keep), map(google map), 
+  messenger(me), miro, notion(no), oxford dictionary(ox), 
+  google translate(tr), youtube(y), youglish(yg), zalo(z)
+List of website supported:
+  figma(fi), miro, notion(no), obs, sharex, slack(sl),
+  teamviewer(teamview), zalo(z)`
 
 const examples = [
 	{
-		command: `c <command>`,
+		command: `shutdown`,
 	},
 	{
-		command: `c <command>`,
+		command: `restart`,
+	},
+	{
+		command: `app "string of commands"`,
+	},
+	{
+		command: `web "string of commands"`,
+	},
+	{
+		command: `web "string of commands"`,
 		flags: [`window`],
 	},
 ]
