@@ -36,10 +36,10 @@ function runPS(script) {
 	ps.on('end', (code) => {
 		// Do Something on end
 	})
+}
 
-	function logError(script) {
-		console.info.call(console, `\x1b[31m${script}\x1b[0m`)
-	}
+function logError(script) {
+	console.info.call(console, `\x1b[31m${script}\x1b[0m`)
 }
 
 function checkExceptionCommand(command) {
@@ -105,11 +105,13 @@ function handleAppCommand(options) {
 
 function handleWebCommand(options) {
 	options.forEach((option) => {
-		if (!!c.web[option]) {
-			if (option === 'gemi') runW(c.web[option], flags.window, false)
-			else runW(c.web[option], flags.window)
-		} else if (option.match(/:[\d]+/)) runW('localhost' + option)
-		else logError(`Unknown command: "${option}"`)
+		const cO = option.replace(/\/.+/, '') // convert option
+		const param = option.replace(cO, '')
+		if (!!c.web[cO]) {
+			if (cO === 'gemi') runW(c.web[cO], flags.window, false)
+			else runW(c.web[cO] + param, flags.window)
+		} else if (cO.match(/:[\d]+/)) runW('localhost' + cO, flags.window, false)
+		else logError(`Unknown command: "${cO}"`)
 	})
 }
 
