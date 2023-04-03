@@ -16,7 +16,7 @@ function run(command) {
 function runW(url, isWindow, isS = true) {
 	let convertURL = isS ? `https://${url}` : `http://${url}`
 	convertURL = isWindow ? ' --app=' + convertURL : convertURL
-	run(`${c.app.chrome} ${convertURL}`)
+	run(`${c.app.c} ${convertURL}`)
 }
 // Run powershell
 function runPS(script) {

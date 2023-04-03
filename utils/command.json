@@ -21,7 +21,7 @@
 		"z": "chat.zalo.me"
 	},
 	"app": {
-		"chrome": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
+		"c": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
 		"code": "code",
 		"di": "%USERPROFILE%\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe",
 		"fi": "%USERPROFILE%\\AppData\\Local\\Figma\\Update.exe --processStart Figma.exe",

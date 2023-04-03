@@ -13,19 +13,23 @@ npm install -g flash-action
 ### For application:
 
 ```sh
-n <command>
+n app "string of commands"
+n app "no"
+n app "no obs z"
 ```
 
 Supported apps include:
 
+- `c` - Google Chrome.
 - `code` - Visual Studio Code.
 - `di` - Discord.
 - `fi` - Figma.
-- `mi` - Miro.
+- `miro` - Miro.
 - `no` - Notion.
-- `sh` - ShareX.
+- `obs` - OBS Studio.
+- `sharex` - ShareX.
 - `sl` - Slack.
-- `tv` - Teamviewer.
+- `teamview` - Teamviewer.
 - `z` - Zalo.
 
 ### For website:
@@ -33,13 +37,17 @@ Supported apps include:
 You use flash-action as basic browser:
 
 ```sh
-n c <command>
+n web "string of commands"
+n web "cam"
+n web "fi miro ox"
 ```
 
 You can also surf the internet as a window:
 
 ```sh
-n c <command> --window
+n web "string of commands" --window
+n web "cam" --window
+n web "fi miro ox" --window
 ```
 
 Supported websites include:
@@ -67,4 +75,12 @@ Forcing close on window all program and shutdown immediately.
 
 ```sh
 n shutdown
+```
+
+### Restart:
+
+Forcing close on window all program and restart immediately.
+
+```sh
+n restart
 ```
