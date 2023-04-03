@@ -1,5 +1,4 @@
 const cli = require('./cli')
-const input = cli.input
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
 const c = require('./command.json')
