@@ -14,21 +14,13 @@ function run(command) {
 	})
 }
 
-// Run website as a window
-function runP(url, isS = true) {
-	run(`${s.app.chrome} --app=${wrapH(url, isS)}`)
+// Run website
+function runW(url, isWindow, isS = true) {
+	let convertURL = isS ? `https://${url}` : `http://${url}`
+	convertURL = isWindow ? ' --app=' + convertURL : convertURL
+	run(`${c.app.chrome} ${convertURL}`)
 }
-
-// check command have in input list
-function checkI(command) {
-	return input.includes(command)
-}
-
-function wrapH(url, isS = true) {
-	const s = isS ? 's' : ''
-	return `http${s}://${url}`
-}
-
+// Run powershell
 function runPS(script) {
 	const ps = new PowerShell(script)
 	ps.on('error', (err) => {
@@ -59,13 +51,55 @@ To see a list of supported n command, run:
 	return true
 }
 
-function checkIL(callback) {
-	const stack = []
-	input.forEach((item) => {
-		if (item.includes('l:')) stack.push(item.slice(2))
-	})
-	callback(stack)
-	return false
+function checkCommand(command) {
+	return !!c[command]
 }
 
-module.exports = { run, runP, runPS, checkI, wrapH, checkExceptionCommand, checkIL }
+function handleValidation(stack) {
+	while (stack.length) {
+		const command = stack.shift()
+		checkCommand(command) && performCommandType(command, stack)
+	}
+}
+
+function performCommandType(command, stack) {
+	const options = stack.shift().trim().split(/[ ]+/g)
+	switch (command) {
+		case 'app':
+			handleAppCommand(options)
+			break
+		case 'web':
+			handleWebCommand(options)
+			break
+		case 'shutdown':
+			runPS(c.shutdown)
+			break
+		case 'restart':
+			runPS(c.restart)
+			break
+		case 'help':
+			cli.showHelp(0)
+			break
+		default:
+			checkExceptionCommand()
+	}
+}
+
+function handleAppCommand(options) {
+	options.forEach((option) => {
+		if (!!c.app[option]) run(c.app[option])
+		else console.log(`Unknown command: "${option}"`)
+	})
+}
+
+function handleWebCommand(options) {
+	options.forEach((option) => {
+		if (!!c.web[option]) {
+			if (option === 'gemi') runW(c.web[option], window, true)
+			else runW(c.web[option], window)
+		} else if (option.match(/:[\d]+/)) runW('localhost' + option)
+		else console.log(`Unknown command: "${option}"`)
+	})
+}
+
+module.exports = { handleValidation }
