@@ -36,10 +36,10 @@ function runPS(script) {
 	ps.on('end', (code) => {
 		// Do Something on end
 	})
+}
 
-	function logError(script) {
-		console.info.call(console, `\x1b[31m${script}\x1b[0m`)
-	}
+function logError(script) {
+	console.info.call(console, `\x1b[31m${script}\x1b[0m`)
 }
 
 function checkExceptionCommand(command) {
