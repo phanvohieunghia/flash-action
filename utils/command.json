@@ -1,6 +1,6 @@
 {
-	"restart": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Stop-Computer",
-	"shutdown": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Restart-Computer",
+	"restart": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Restart-Computer",
+	"shutdown": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Stop-Computer",
 	"help": "help",
 	"web": {
 		"cam": "dictionary.cambridge.org",
