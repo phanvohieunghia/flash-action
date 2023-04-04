@@ -58,13 +58,7 @@ function handleValidation(stack) {
 	}
 }
 
-function checkOptions(command, options) {
-	switch (command) {
-		case 'help':
-		case 'shutdown':
-		case 'restart':
-			return true
-	}
+function checkOptions(options) {
 	if (!options) {
 		logError('You need string input with each command separated by a space')
 		return false
@@ -73,7 +67,6 @@ function checkOptions(command, options) {
 
 function makeCommand(command, stack) {
 	const options = stack.shift()?.trim().split(/[ ]+/g)
-	if (!checkOptions(command, options)) return
 
 	switch (command) {
 		case 'app':
@@ -97,6 +90,7 @@ function makeCommand(command, stack) {
 }
 
 function handleAppCommand(options) {
+	if (!checkOptions(options)) return
 	options.forEach((option) => {
 		if (!!c.app[option]) run(c.app[option])
 		else logError(`Unknown command: "${option}"`)
@@ -104,6 +98,7 @@ function handleAppCommand(options) {
 }
 
 function handleWebCommand(options) {
+	if (!checkOptions(options)) return
 	options.forEach((option) => {
 		const cO = option.replace(/\/.+/, '') // convert option
 		const param = option.replace(cO, '')
