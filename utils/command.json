@@ -1,6 +1,6 @@
 {
-	"restart": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Stop-Computer",
-	"shutdown": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Restart-Computer",
+	"restart": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Restart-Computer",
+	"shutdown": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Stop-Computer",
 	"help": "help",
 	"web": {
 		"cam": "dictionary.cambridge.org",
@@ -27,10 +27,11 @@
 		"fi": "%USERPROFILE%\\AppData\\Local\\Figma\\Update.exe --processStart Figma.exe",
 		"miro": "%USERPROFILE%\\AppData\\Local\\RealtimeBoard\\Miro.exe",
 		"no": "%USERPROFILE%\\AppData\\Local\\Programs\\Notion",
-		"obs": "C:\\Program Files\\obs-studio\\bin\\64bit",
-		"sharex": "C:\\Program Files\\ShareX\\ShareX.exe",
+		"obs": "\"C:\\Program Files\\obs-studio\\bin\\64bit\"",
+		"sharex": "\"C:\\Program Files\\ShareX\\ShareX.exe\"",
 		"sl": "%USERPROFILE%\\AppData\\Local\\slack\\slack.exe",
-		"teamview": "C:\\Program Files\\TeamViewer\\TeamViewer.exe",
+		"teamview": "\"C:\\Program Files\\TeamViewer\\TeamViewer.exe\"",
+		"telegram": "\"%USERPROFILE%\\AppData\\Roaming\\Telegram Desktop\\Telegram.exe\"",
 		"z": "%USERPROFILE%\\AppData\\Local\\Programs\\Zalo\\Zalo.exe"
 	}
 }
