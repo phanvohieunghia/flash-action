@@ -81,12 +81,19 @@ function makeCommand(command, stack) {
 		case 'restart':
 			runPS(c.restart)
 			break
+		case 'wifi':
+			handleWifi(options)
+			break
 		case 'help':
 			cli.showHelp(0)
 			break
 		default:
 			checkExceptionCommand(command)
 	}
+}
+function handleWifi(options) {
+	if (options) runPS(`netsh wlan show profile "${options.join(' ')}" key=clear`)
+	else runPS('netsh wlan show profile')
 }
 
 function handleAppCommand(options) {
