@@ -2,6 +2,8 @@
 	"restart": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Restart-Computer",
 	"shutdown": "Get-Process | Where-Object {$_.MainWindowTitle -ne \"\"} | Where-Object ProcessName -NotContains \"WindowsTerminal\" | Stop-Process ; Stop-Computer",
 	"help": "help",
+	"wifi": "wifi",
+	"d": "d",
 	"web": {
 		"cam": "dictionary.cambridge.org",
 		"fi": "figma.com",

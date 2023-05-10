@@ -51,16 +51,17 @@ To see a list of supported n option, run:
 	}
 }
 
-function handleValidation(stack) {
+function handleValidation(stack, key) {
 	while (stack.length) {
 		const command = stack.shift()
 		makeCommand(command, stack)
 	}
 }
 
-function checkOptions(options) {
+function checkOptions(options, commandKey) {
 	if (!options) {
-		logError('You need string input with each command separated by a space')
+		if (commandKey === c.d) logError('You need decoded string.')
+		else logError('You need string input with each command separated by a space.')
 		return false
 	} else return true
 }
@@ -84,6 +85,9 @@ function makeCommand(command, stack) {
 		case 'wifi':
 			handleWifi(options)
 			break
+		case 'd':
+			handleDecodeURIComponent(options)
+			break
 		case 'help':
 			cli.showHelp(0)
 			break
@@ -91,6 +95,12 @@ function makeCommand(command, stack) {
 			checkExceptionCommand(command)
 	}
 }
+
+function handleDecodeURIComponent(options) {
+	if (!checkOptions(options, c.d)) return
+	console.log(decodeURIComponent(options))
+}
+
 function handleWifi(options) {
 	if (options) runPS(`netsh wlan show profile "${options.join(' ')}" key=clear`)
 	else runPS('netsh wlan show profile')
