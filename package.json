@@ -1,7 +1,7 @@
 {
 	"name": "flash-action",
 	"description": "A CLI improve work performances",
-	"version": "2.2.1",
+	"version": "2.2.2",
 	"license": "MIT",
 	"bin": {
 		"flash-action": "index.js",
