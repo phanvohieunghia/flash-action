@@ -1,7 +1,7 @@
 {
 	"name": "flash-action",
 	"description": "A CLI improve work performances",
-	"version": "2.2.2",
+	"version": "2.3.1",
 	"license": "MIT",
 	"bin": {
 		"flash-action": "index.js",
@@ -33,6 +33,7 @@
 		"url": "https://github.com/phanvohieunghia/flash-action"
 	},
 	"dependencies": {
+		"archiver": "^5.3.1",
 		"chalk": "^4.1.2",
 		"cli-alerts": "^1.2.2",
 		"cli-handle-error": "^4.4.0",

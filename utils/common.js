@@ -2,6 +2,8 @@ const cli = require('./cli')
 const cmd = require('node-cmd')
 const PowerShell = require('powershell')
 const c = require('./command.json')
+const fs = require('fs')
+const archiver = require('archiver')
 
 const flags = cli.flags
 
@@ -51,7 +53,7 @@ To see a list of supported n option, run:
 	}
 }
 
-function handleValidation(stack, key) {
+function handleValidation(stack) {
 	while (stack.length) {
 		const command = stack.shift()
 		makeCommand(command, stack)
@@ -66,9 +68,45 @@ function checkOptions(options, commandKey) {
 	} else return true
 }
 
+function handleFolderZip(options) {
+	function zipFolder(options) {
+		const output = fs.createWriteStream(options + '.rar')
+		const archive = archiver('zip', { zlib: { level: 9 } })
+
+		output.on('close', function () {
+			console.log('Folder successfully zipped.')
+		})
+
+		archive.on('error', function (err) {
+			throw err
+		})
+
+		archive.pipe(output)
+		archive.directory(process.cwd() + '\\' + options, false)
+		archive.finalize()
+	}
+
+	async function zipMultipleFolders(options) {
+		// FIX: feat: output
+		// if (sourceFolders.length !== outputFilePaths.length) {
+		// 	console.log('Error: The number of source folders and output file paths must be the same.')
+		// 	return
+		// }
+
+		try {
+			for (let i = 0; i < options.length; i++) {
+				await zipFolder(options[i])
+			}
+		} catch (err) {
+			console.log('An error occurred:', err)
+		}
+	}
+
+	zipMultipleFolders(options)
+}
+
 function makeCommand(command, stack) {
 	const options = stack.shift()?.trim().split(/[ ]+/g)
-
 	switch (command) {
 		case 'app':
 			handleAppCommand(options)
@@ -87,6 +125,9 @@ function makeCommand(command, stack) {
 			break
 		case 'd':
 			handleDecodeURIComponent(options)
+			break
+		case 'zip':
+			handleFolderZip(options)
 			break
 		case 'help':
 			cli.showHelp(0)
