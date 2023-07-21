@@ -53,13 +53,6 @@ To see a list of supported n option, run:
 	}
 }
 
-function handleValidation(stack) {
-	while (stack.length) {
-		const command = stack.shift()
-		makeCommand(command, stack)
-	}
-}
-
 function checkOptions(options, commandKey) {
 	if (!options) {
 		if (commandKey === c.d) logError('You need decoded string.')
@@ -70,7 +63,8 @@ function checkOptions(options, commandKey) {
 
 function handleFolderZip(options) {
 	function zipFolder(options) {
-		const output = fs.createWriteStream(options + '.rar')
+		const format = flags.zip ? '.zip' : '.rar'
+		const output = fs.createWriteStream(options + format)
 		const archive = archiver('zip', { zlib: { level: 9 } })
 
 		output.on('close', function () {
@@ -80,19 +74,12 @@ function handleFolderZip(options) {
 		archive.on('error', function (err) {
 			throw err
 		})
-
 		archive.pipe(output)
 		archive.directory(process.cwd() + '\\' + options, false)
 		archive.finalize()
 	}
 
 	async function zipMultipleFolders(options) {
-		// FIX: feat: output
-		// if (sourceFolders.length !== outputFilePaths.length) {
-		// 	console.log('Error: The number of source folders and output file paths must be the same.')
-		// 	return
-		// }
-
 		try {
 			for (let i = 0; i < options.length; i++) {
 				await zipFolder(options[i])
@@ -105,9 +92,9 @@ function handleFolderZip(options) {
 	zipMultipleFolders(options)
 }
 
-function makeCommand(command, stack) {
-	const options = stack.shift()?.trim().split(/[ ]+/g)
-	switch (command) {
+function makeCommand(input) {
+	const options = input[1]?.split(/[ ]+/g)
+	switch (input[0]) {
 		case 'app':
 			handleAppCommand(options)
 			break
@@ -168,4 +155,4 @@ function handleWebCommand(options) {
 	})
 }
 
-module.exports = { handleValidation }
+module.exports = { makeCommand }
