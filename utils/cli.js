@@ -31,6 +31,11 @@ const flags = {
 		alias: `w`,
 		desc: `Open website as a window`,
 	},
+	zip: {
+		type: `boolean`,
+		default: false,
+		desc: `Compress folder with ZIP file format`,
+	},
 }
 
 const commands = {

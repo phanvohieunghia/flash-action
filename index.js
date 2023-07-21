@@ -10,12 +10,11 @@
 const init = require('./utils/init')
 const cli = require('./utils/cli')
 const log = require('./utils/log')
-const { handleValidation } = require('./utils/common')
+const { makeCommand } = require('./utils/common')
 
 const input = cli.input
 const flags = cli.flags
 const { clear, debug } = flags
-
 ;(async () => {
 	debug && log(flags)
 	// Check any input
@@ -24,7 +23,7 @@ const { clear, debug } = flags
 		return
 	}
 
-	handleValidation(input)
+	makeCommand(input)
 
 	// TODO: make search function
 })()
