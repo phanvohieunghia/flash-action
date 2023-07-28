@@ -4,6 +4,8 @@ const PowerShell = require('powershell')
 const c = require('./command.json')
 const fs = require('fs')
 const archiver = require('archiver')
+const { exec } = require('child_process')
+const util = require('util')
 
 const flags = cli.flags
 
@@ -92,8 +94,31 @@ function handleFolderZip(options) {
 	zipMultipleFolders(options)
 }
 
+const handleBuildProject = (options, steps) => {
+	async function runShellCommands(options) {
+		const execPromise = util.promisify(exec)
+		for (const option of options) {
+			try {
+				const { stdout, stderr } = await execPromise('npm run build:' + option)
+				if (steps.includes('zip')) await execPromise('n zip admin-' + option)
+				if (steps.includes('rm')) await runPS('rm -r admin-' + option)
+
+				console.log('Standard Output for option:', stdout)
+				if (stderr) console.log('Standard Error for option:', option)
+			} catch (error) {
+				console.error('Error executing the option:', error.message)
+			}
+		}
+	}
+
+	;(async () => {
+		await runShellCommands(options, steps)
+	})()
+}
+
 function makeCommand(input) {
 	const options = input[1]?.split(/[ ]+/g)
+	const steps = input[2]?.split(/[ ]+/g)
 	switch (input[0]) {
 		case 'app':
 			handleAppCommand(options)
@@ -118,6 +143,9 @@ function makeCommand(input) {
 			break
 		case 'help':
 			cli.showHelp(0)
+			break
+		case 'build':
+			handleBuildProject(options, steps)
 			break
 		default:
 			checkExceptionCommand(command)
