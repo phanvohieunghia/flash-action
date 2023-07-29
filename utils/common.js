@@ -1,12 +1,12 @@
-const cli = require('./cli')
-const cmd = require('node-cmd')
-const PowerShell = require('powershell')
-const c = require('./command.json')
 const fs = require('fs')
-const archiver = require('archiver')
-const { exec } = require('child_process')
+const cli = require('./cli')
 const util = require('util')
-
+const cmd = require('node-cmd')
+const c = require('./command.json')
+const archiver = require('archiver')
+const PowerShell = require('powershell')
+const { exec } = require('child_process')
+// TODO: write readme
 const flags = cli.flags
 
 // run command by Command Prompt
